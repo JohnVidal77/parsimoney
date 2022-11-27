@@ -1,0 +1,6 @@
+{
+    "src/**/*.{ts, tsx}": [
+        "bash -c tsc --noEmit",
+        "git add ."
+    ]
+}
