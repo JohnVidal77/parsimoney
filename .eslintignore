@@ -1,3 +1,5 @@
+*.ts
+*.js
 **/*.js
 node_modules
 coverage
