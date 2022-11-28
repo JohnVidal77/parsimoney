@@ -1,9 +1,5 @@
-import { Button } from '@chakra-ui/react';
+import { Router } from './app/Router';
 
 export function App() {
-	return (
-		<div>
-			<Button colorScheme="green">Button</Button>
-		</div>
-	);
+	return <Router />;
 }
