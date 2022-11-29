@@ -16,6 +16,7 @@ import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
 import { useAuthenticate } from '../../../data/hooks/authentication/useAuthenticate';
 import { AuthError } from 'firebase/auth';
+import { ToastConfig } from '../../../configs/toast.config';
 
 interface FormValues {
 	email: string;
@@ -23,8 +24,8 @@ interface FormValues {
 }
 
 const schema = Yup.object({
-	email: Yup.string().required('Email obrigatório').email('Email inválido'),
-	password: Yup.string().min(6).required('Senha obrigatória'),
+	email: Yup.string().required().email(),
+	password: Yup.string().min(6).required(),
 }).required();
 
 export function LoginPage() {
@@ -38,29 +39,28 @@ export function LoginPage() {
 	});
 	const toast = useToast();
 
-	const { mutateAsync } = useAuthenticate();
+	const { mutateAsync, isLoading } = useAuthenticate();
 
 	const onSubmit = async (data: FormValues) => {
 		try {
 			await mutateAsync(data);
+
+			navigate('/dashboard');
 		} catch (error) {
 			const err = error as AuthError;
 
 			toast({
-				colorScheme: 'red',
-				title: 'Erro ao fazer login',
+				...ToastConfig,
+				title: 'Error logging in',
 				description: err.message,
 				status: 'error',
-				duration: 5000,
-				isClosable: true,
-				position: 'top-right',
 			});
 		}
 	};
 
 	return (
 		<Grid placeItems="center" w="100vw" h="100vh">
-			<GridItem p="4">
+			<GridItem p="4" w="full" maxW="96">
 				<Heading as="h1" size={'2xl'} marginBottom="8">
 					Login
 				</Heading>
@@ -74,7 +74,7 @@ export function LoginPage() {
 								placeholder="Email"
 								{...register('email', { required: true })}
 							/>
-							<FormErrorMessage>Enter your email right</FormErrorMessage>
+							<FormErrorMessage>{errors.email?.message}</FormErrorMessage>
 						</FormControl>
 
 						<FormControl isInvalid={!(errors.password == null)} mb="4">
@@ -84,7 +84,7 @@ export function LoginPage() {
 								placeholder="Password"
 								{...register('password', { required: true })}
 							/>
-							<FormErrorMessage>Enter your password right</FormErrorMessage>
+							<FormErrorMessage>{errors.password?.message}</FormErrorMessage>
 						</FormControl>
 					</Box>
 
@@ -94,6 +94,7 @@ export function LoginPage() {
 						colorScheme="green"
 						w="full"
 						mb={'4'}
+						isLoading={isLoading}
 					>
 						Submit
 					</Button>

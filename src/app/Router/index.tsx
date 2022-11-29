@@ -1,31 +1,25 @@
-import {
-	createBrowserRouter,
-	RouterProvider,
-	Navigate,
-} from 'react-router-dom';
+import { Navigate, BrowserRouter, Route, Routes } from 'react-router-dom';
+
+import { DashboardPage } from '../../pages/Dashboard';
 import { ForgotPasswordPage } from '../../pages/OnBoarding/ForgotPassword';
 import { LoginPage } from '../../pages/OnBoarding/Login';
 import { RegisterPage } from '../../pages/OnBoarding/Register';
-
-const router = createBrowserRouter([
-	{
-		path: '/',
-		element: <Navigate to="/login" replace={true} />,
-	},
-	{
-		path: '/login',
-		element: <LoginPage />,
-	},
-	{
-		path: '/register',
-		element: <RegisterPage />,
-	},
-	{
-		path: '/forgot-password',
-		element: <ForgotPasswordPage />,
-	},
-]);
+import { ProfilePage } from '../../pages/Profile';
+import { RequireAuth } from './RequiredAuth';
 
 export function Router() {
-	return <RouterProvider router={router} />;
+	return (
+		<BrowserRouter>
+			<Routes>
+				<Route path="/" element={<Navigate to="/login" replace={true} />} />
+				<Route path="/login" element={<LoginPage />} />
+				<Route path="/register" element={<RegisterPage />} />
+				<Route path="/forgot-password" element={<ForgotPasswordPage />} />
+				<Route path="/" element={<RequireAuth />}>
+					<Route path="/dashboard" element={<DashboardPage />} />
+					<Route path="/profile" element={<ProfilePage />} />
+				</Route>
+			</Routes>
+		</BrowserRouter>
+	);
 }
