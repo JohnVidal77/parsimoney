@@ -1,9 +1,12 @@
-import { Button } from '@chakra-ui/react';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Router } from './app/Router';
+
+const queryClient = new QueryClient();
 
 export function App() {
 	return (
-		<div>
-			<Button colorScheme="green">Button</Button>
-		</div>
+		<QueryClientProvider client={queryClient}>
+			<Router />
+		</QueryClientProvider>
 	);
 }
