@@ -14,9 +14,9 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
-import { useAuthenticate } from '../../../data/hooks/authentication/useAuthenticate';
+import { useAuthenticate } from '../../../../data/hooks/authentication/useAuthenticate';
 import { AuthError } from 'firebase/auth';
-import { ToastConfig } from '../../../configs/toast.config';
+import { ToastConfig } from '../../../../configs/toast.config';
 
 interface FormValues {
 	email: string;
@@ -104,7 +104,7 @@ export function LoginPage() {
 						colorScheme="green"
 						w="full"
 						variant={'outline'}
-						onClick={() => navigate('/register')}
+						onClick={() => navigate('/create-account')}
 						mb={'4'}
 					>
 						Create an account

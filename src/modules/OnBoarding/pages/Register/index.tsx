@@ -16,9 +16,9 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { MdArrowBack } from 'react-icons/md';
 
-import { useCreateUser } from '../../../data/hooks/user/useCreateUser';
+import { useCreateUser } from '../../../../data/hooks/user/useCreateUser';
 import { AuthError } from 'firebase/auth';
-import { ToastConfig } from '../../../configs/toast.config';
+import { ToastConfig } from '../../../../configs/toast.config';
 import { useNavigate } from 'react-router-dom';
 
 interface FormValues {

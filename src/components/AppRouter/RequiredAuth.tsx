@@ -1,6 +1,6 @@
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { onAuthStateChanged } from 'firebase/auth';
-import { auth } from '../Firebase';
+import { auth } from '../../app/Firebase';
 import { useEffect, useState } from 'react';
 import { CircularProgress, Grid, GridItem } from '@chakra-ui/react';
 

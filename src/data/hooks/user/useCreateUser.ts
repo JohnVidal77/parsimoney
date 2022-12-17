@@ -1,12 +1,13 @@
 import { useMutation } from '@tanstack/react-query';
 import {
-  createUser, ICreateUserParams
+	createUser,
+	ICreateUserParams,
 } from '../../controllers/user.controller';
 
 export function useCreateUser() {
-  async function mutation(data: ICreateUserParams) {
-    return createUser(data);
-  }
+	async function mutation(data: ICreateUserParams) {
+		return createUser(data);
+	}
 
-  return useMutation(mutation);
+	return useMutation(mutation);
 }
